@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<style>
+  /*通用样式*/
+  *{margin: 0px;padding:0px;}
+  a, a:hover, a:link {
+    text-decoration: none;
+    outline: 0;
+  }
+  ul li{ list-style-type: none;  }
+        /*清除浮动样式*/
+  .clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+  .clearfix:before, .clearfix:after {
+    content: '.';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0;
+  }
+  .clearfix:after {
+    clear: both;
+  }
+  .clearfix {
+    zoom: 1;
+  }
+  /*头部+搜索*/
+  #gHeader {
+    position: fixed;
+    width: 100%;
+    height: 47px;
+    line-height: 1.5;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    margin: auto;
+    right: 0;
+  }
+  .level1 {
+    z-index: 4;
+  }
+  .level1, .logoPacity {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+  #gHeader .f_logo {
+    width: 58px;
+    padding-left: 10px;
+    margin-top: 7px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+  }
+  #container img, .f_logo img {
+    vertical-align: top;
+  }
+  .f_logo img {
+    width: 100%;
+    border: 0;
+    height: 32px;
+    max-width: 100%;
+  }
+  .search {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+  }
+  #container .search img {
+    width: 22px;
+    height: auto;
+  }
+  #container img, .f_logo img {
+    vertical-align: top;
+  }
+  #gHeader .search_box {
+    position: relative;
+    margin: 0 50px 0 75px;
+    padding: 6px 0;
+    box-sizing: border-box;
+  }
+  .wapSearch {
+     background-color: #fff;
+     border-radius: 4px;
+     padding: 0 35px;
+     margin: 0;
+     display: block;
+   }
+  #gHeader .search_btn {
+    border: 0;
+    background: url(../src/common/image/search.png) no-repeat;
+    background-size: 18px auto;
+    width: 18px;
+    height: 18px;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+  }
+  #gHeader .search_txt {
+    border: 0;
+    background: 0;
+    padding: 5px 0;
+    height: 35px;
+    font-size: 13px;
+    display: inline-block;
+    text-align: left;
+  }
+  #gHeader .search_txt, .ind_navi {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .logoPacity {
+    z-index: 3;
+    background: #1661df;
+  }
+  /*底部*/
+  #footer {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding-bottom: 18px;
+    padding-top: 12px;
+    text-align: center;
+  }
+  #foot {
+    position: inherit;
+    padding-bottom: 45px;
+  }
+  .download_link {
+    margin: 5px 0;
+  }
+  .download_link a {
+    background: url(../src/common/image/download.png) left center no-repeat;
+    background-size: 24px auto;
+    display: inline-block;
+    line-height: 32px;
+    margin: 0;
+    padding: 0 0 2px 32px;
+    color: #0093e7;
+  }
+  .search img {
+    width: 22px;
+    height: auto;
+  }
+  #footer p {
+    font-size: 12px;
+    color: #b6b6b6;
+    line-height: 18px;
+  }
+  .scroll{
+    width: 100%;
+  }
+  .scrollImg img{
+    width: 100%;
+  }
+  .ind_navi {
+    padding: 3% 0;
+    top: 0;
+    text-align: center;
+  }
+  .ind_navi li {
+    float: left;
+    width: 25%;
+    min-height: 72px;
+    margin-bottom: 10px;
+  }
+  .ind_navi li a {
+    display: inline-block;
+    font-size: 14px;
+    color: #5e5e5e;
+    font-family: "黑体";
+    text-decoration: none;
+  }
+  .ind_navi li a i {
+    display: block;
+    margin: 0 auto 8px;
+    width: 45px;
+    font-style: normal;
+  }
+  .ind_navi li a i img{
+    width:100%;
+  }
+  /* 秒杀 */
+  .miaosha{
+    padding: 10px;
+  }
+  .msTitleLeft img{
+    width:20px;
+    height:20px;
+  }
+  .msTitleLeft span{
+    font-size: 16px;
+    vertical-align:3px;
+    margin-left: 10px;
+    color: #EF6D6D;
+    font-weight: bold;
+  }
+  .msTitleLeft{
+    float: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #F4F4F4;
+  }
+  .msTitleRight{
+    font-size:16px;
+    float: right;
+  }
+  .msTitleRight .time{
+    display: inline-block;
+    width:20px;
+    height: 20px;
+    background-color: #535353;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+  }
+  .msGoods{
+    width:150px;
+    height:150px;
+    display:inline-block;
+    margin-right: 10px;
+    position: relative;
+  }
+  .msGoods img{
+    width:100%;
+    height:100%;
+  }
+  .msGoods-text{
+    position: absolute;
+    margin: 5px;
+    padding: 5px;
+    background-color:rgba(0,0,50,0.7);
+    color: #fff;
+    font-size: 16px;
+  }
+  .msGoods-text span{
+    display: block;
+  }
+  .deLine{
+    text-decoration:line-through;
+  }
+  .line{
+    height:10px;
+    background-color: #F0F1F3;
+  }
+  .jinrituangou{
+    display: flex;
+    flex-direction: row;
+    background-color: #FF5D5D;
+    padding: 10px;
+  }
+
+  .jr-title{
+    width:25%;
+    margin-top:15px;
+
+  }
+  .jr-link{
+    width:75%;
+    padding: 10px;
+  }
+  .youdeNew{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+  }
+  .newTitle{
+    width:13%;
+  }
+  .newCont{
+    width:87%;
+  }
+  .newTitle span{
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+  }
+  .newSwiper{
+    height: 50px;
+  }
+  .newText{
+    height: 30px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  .newTextNet{
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 20px;
+    border: 1px solid #FF5D5D;
+    color: #FF5D5D;
+  }
+  .newTextNetCont{
+    margin-left: 10px;
+    vertical-align: -11px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    width: 74%;
+  }
+  .jr-title1{
+    font-size:16px;
+    color: #fff;
+    display:block;
+    margin: 5px 0px;
+  }
+  .jr-title2{
+    font-size:20px;
+    color: #fff;
+    display: block;
+    margin: 5px 0px;
+    font-style: italic;
+    font-weight: bold;
+  }
+  .jrSwiper{
+    height: 70px;
+  }
+  .jrSwiperList{
+    display: flex;
+    flex-direction: row;
+  }
+  .jrSwiperListImg{
+    width: 30%;
+    margin-right:10px;
+
+  }
+  .jrSwiperListText{
+    width: 70%;
+    font-size: 16px;
+  }
+  .jrSwiperListImg img{
+    width: 70px;
+    height:70px;
+  }
+  .jsSwiperP,.jsSwiperPrace{
+    display: block;
+    color: #fff;
+  }
+  .jsSwiperP{
+    font-size:16px;
+    height: 42px;
+    overflow: hidden;
+  }
+  .jsSwiperPrace{
+    margin-top:10px;
+  }
+  .group{
+    padding: 10px;
+  }
+  .groupListCont{
+    width: 48%;
+    float: left;
+  }
+  .group .groupListCont:nth-of-type(odd){
+    margin-right: 10px;
+  }
+  .groupListCont img{
+    width: 100%;
+    height: 105px;
+  }
+
+  .groupList-s{
+    height: 105px;
+  }
+  .groupList-s img{
+    width: 100%;
+    height: 100%;
+  }
+  .group2{
+    padding-top: 0px;
+  }
+  .recommendTitle{
+    height: 30px;
+    line-height: 30px;
+    padding: 10px;
+    border-bottom: 1px solid #F4F4F4;
+  }
+  .recommendTitle img{
+    width: 20px;
+    height: 20px;
+    vertical-align: -3px;
+    margin-right: 10px;
+  }
+  .recommendTitle span{
+    font-size: 16px;
+    font-weight: bold;
+    color: #594C52;
+  }
+  .recommendCont{
+    padding: 10px;
+    padding-bottom: 0px;
+  }
+  .recommendList{
+    width: 50%;
+    float: left;
+    border-bottom: 1px solid #E9E9E9;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .recommendList img{
+    width: 100%;
+    height: 150px;
+  }
+  .recommendList span{
+    font-size:16px;
+  }
+  .recommendListTitle{
+    color: #313131;
+    display: block;
+    overflow: hidden;
+    height:21px;
+  }
+  .recommendListPrace{
+    color: red;
+    font-size: 12px;
+  }
+  .isGenre{
+    display: inline-block;
+    line-height: 10px;
+    padding: 5px;
+    background-color: red;
+    color:#ffffff;
+    margin-right: 5px;
+  }
+  .bottom-to-top {
+    position: fixed;
+    bottom: 56px;
+    right: 8px;
+    height: auto;
+    width: 40px;
+    z-index: 20;
+  }
+  .no-data{
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+  .no-data-content {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: #f5f5f5;
+  }
+  .no-data-content p {
+    text-align: center;
+    line-height: 20px;
+    position: absolute;
+    top: 10px;
+    width: 100px;
+    left: 50%;
+    margin-left: -50px;
+    color: #d3d3d3;
+    font-size: 14px;
+    display: block;
+  }
+  .floor {
+    width: 100%;
+  }
+  .bottom-bar-pannel {
+    position: fixed;
+    height: 48px;
+    z-index: 28;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ffffff;
+    background-color: #fff;
+  }
+  .floor-container {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
+  .bottom-bar-pannel .tab4 {
+    height: 100%;
+    position: relative;
+    display: flex;
+    background-color: #ffffff;
+  }
+  .bottom-bar-pannel .tab4 li {
+    text-align: center;
+    width: 25%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: auto;
+  }
+  .bottom-bar-pannel .bar-img {
+    display: block;
+    margin-top: 6px;
+  }
+  .tab4 span {
+    display: block;
+    color: #666;
+  }
+  .bottom-bar-pannel .bar-img a {
+    display: block;
+  }
+  .bottom-bar-pannel .bar-img img {
+    height: 20px;
+    width: auto;
+    overflow: hidden;
+  }
+  .tab4 .cart-index {
+    line-height: 12px;
+    color: #196dfa;
+  }
+ .tab4 .cart-index, .tab4 .cart-span {
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+  .shopcar_num {
+    background-color: #eb4344;
+    display: block;
+    font-family: arial;
+    position: absolute;
+    margin-left: 50px;
+    border-radius: 8px;
+    height: 12px;
+    line-height: 15px;
+    font-size: 10px;
+    text-align: center;
+    padding: 0 2px;
+    top: -3px;
+    margin-top: 5px;
+    color: #ffffff;
+  }
+</style>
+<body>
+    <header class="clearfix" id="gHeader">
+      <div class="level1">
+        <div class="f_logo">
+          <img src="../src/common/image/b.png" />
+        </div>
+        <div class="search">
+          <a><img src="../src/common/image/w.png" /></a>
+        </div>
+        <div class="search_box">
+          <div class="wapSearch" >
+            <button type="submit" class="search_btn"></button>
+            <input type="text" class="search_txt" placeholder="请输入你要搜索的商品" id="keyword" />
+          </div>
+        </div>
+      </div>
+      <div class="logoPacity" style="opacity: 0.85;" ></div>
+    </header>
+    <section>
+      <div class="scroll">
+          <div class="scrollImg">
+            <img src="../src/common/image/test.jpg" alt="">
+          </div>
+      </div>
+      <div class="line"></div>
+      <div class="menu">
+        <ul class="ind_navi clearfix">
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+          <li> <a href=""><i><img src="../src/common/image/test2.png" /></i>全球购</a> </li>
+        </ul>
+      </div>
+      <div class="line"></div>
+      <div class="miaosha clearfix">
+          <div class="msTitle clearfix">
+              <div class="msTitleLeft">
+                <img src="../src/common/image/msLeft.png" alt="">
+                <span>秒杀</span>
+              </div>
+              <div class="msTitleRight">
+                距结束:
+                <span class="time">1</span> 天
+                <span class="time">1</span>
+                <span class="time">1</span>
+                <span class="time">1</span>
+              </div>
+          </div>
+          <div class="msCont">
+            <div class="msGoods">
+              <div class="msGoods-text">
+                <span>$12</span>
+                <span class="deLine">$10</span>
+              </div>
+              <img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt="">
+            </div>
+          </div>
+      </div>
+      <div class="line"></div>
+      <div class="jinrituangou">
+          <div class="jr-title">
+            <span class="jr-title1">优德医药</span>
+            <span class="jr-title2">今日团购</span>
+          </div>
+          <div class="jr-link">
+            <div class="jrSwiperList">
+              <div class="jrSwiperListImg">
+                <img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt="">
+              </div>
+              <div class="jrSwiperListText">
+                <span class="jsSwiperP">加拿大进口/ YouHealth（优健康） 红景天胶囊 150mg*60粒</span>
+                <span class="jsSwiperPrace">$12</span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="line"></div>
+      <div class="group clearfix">
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+          <div class="groupListCont groupListContEq"><img src="../src/common/image/test3.png" alt=""></div>
+      </div>
+      <div class="group group2">
+        <div class="groupList-s">
+          <img src="https://youde.oss-cn-beijing.aliyuncs.com/44842d29ace44807a2d87d3cd1054d06.png?Expires=1830750519&OSSAccessKeyId=LTAI5oSs4Ylanj0m&Signature=si8EYTDY%2BXC8z0Ro6bzkGDZ2fxk%3D" alt="">
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="recommend">
+        <div class="recommendTitle">
+          <img src="../src/common/image/star.png" alt="">
+          <span>为您推荐</span>
+        </div>
+        <div class="recommendCont clearfix">
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+          <div class="recommendList">
+            <div class="recommendListImg"><img src="https://img.youde.com/images/goods/20170731/c0e4be1554de4125b9ae4e19bdf194c81829560djzcd.png" alt=""></div>
+            <span class="recommendListTitle">加拿大进口/ YouHealth（优健康） 西伯利亚人参胶囊 250mg*60粒</span>
+            <span class="recommendListPrace">$<span>499</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="no-data"> <div class="no-data-content"> <p> 没有啦 </p> </div> </div>
+    <div class="bottom-to-top" > <img src="../src/common/image/big.png" style="width: 100%"> </div>
+    <!--底部菜单tab-->
+    <div class="floor bottom-bar-pannel" style="display: block" >
+      <div class="floor-container">
+        <ul class="tab4">
+          <li> <span class="bar-img"> <a class="index" ><img src="../src/common/image/sy.png" /></a> </span> <span class="cart-index">首页</span> </li>
+          <li> <span class="bar-img"> <a class="category" ><img src="../src/common/image/category.png" /></a> </span> <span class="cart-span">分类</span> </li>
+          <li> <span class="bar-img"> <a class="shopcar" > <i class="shopcar_num">0</i><img src="../src/common/image/gw.png" /> </a> </span> <span class="cart-span">购物车</span> </li>
+          <li data-attach-point="my"> <span class="bar-img"> <a class="mine" href="javascript:void(0)"> <img src="../src/common/image/z.png" /> </a> </span> <span class="cart-span">我的</span> </li>
+        </ul>
+      </div>
+    </div>
+    <!--底部-->
+    <footer id="foot">
+      <div id="footer">
+        <nav class="download_link">
+          <a data-attach-point="downApp">下载客户端</a>
+        </nav>
+        <p>
+          豫备案号ICP备14026278-1
+          <a style="color: #0093e7">资质证书</a>
+        </p>
+        <p>版权信息：河南优德大药房连锁有限公司</p>
+      </div>
+    </footer>
+</body>
+</html>
